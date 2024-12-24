@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     id("maven-publish")
 }
-val libVersion = "1.0.0-alpha01"
+val libVersion = "1.0.0"
 
 android {
     namespace = "com.apero.notification"

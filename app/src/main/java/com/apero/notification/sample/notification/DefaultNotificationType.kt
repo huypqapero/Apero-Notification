@@ -19,8 +19,8 @@ data class DefaultNotificationType(
     val title: String = "Test Sample", val description: String = "This is a sample notification"
 ) : NotificationContent(REQUEST_CODE_PUSH_NOTIFICATION) {
     companion object {
-        private const val NOTIFICATION_ID = 123
-        private const val REQUEST_CODE_PUSH_NOTIFICATION = 1
+        const val NOTIFICATION_ID = 123
+        const val REQUEST_CODE_PUSH_NOTIFICATION = 1
     }
 
     override fun getNotifyId(): Int {

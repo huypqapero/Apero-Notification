@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.apero.notification.NotificationSDK
 import com.apero.notification.ReminderType
+import com.apero.notification.sample.notification.DefaultNotificationType
 import com.apero.notification.sample.notification.FullscreenNotificationContent
 import java.util.concurrent.TimeUnit
 
@@ -43,5 +44,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+//        NotificationSDK.cancelNotificationReminder(DefaultNotificationType.REQUEST_CODE_PUSH_NOTIFICATION)
+//
+//        if (NotificationSDK.isNotificationActive(DefaultNotificationType.NOTIFICATION_ID)) {
+//            NotificationSDK.cancelNotification(DefaultNotificationType.NOTIFICATION_ID)
+//        }
     }
 }

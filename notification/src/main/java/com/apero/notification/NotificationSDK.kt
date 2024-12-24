@@ -62,7 +62,7 @@ object NotificationSDK {
         notificationFactory.cancel(notificationId)
     }
 
-    fun isNotificationActive(notificationId: Int) {
-        notificationFactory.isActive(notificationId)
+    fun isNotificationActive(notificationId: Int): Boolean {
+        return notificationFactory.isActive(notificationId)
     }
 }
