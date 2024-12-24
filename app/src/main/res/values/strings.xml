@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AperoNotification</string>
+    <string name="push_notification">Push Notification</string>
+</resources>
