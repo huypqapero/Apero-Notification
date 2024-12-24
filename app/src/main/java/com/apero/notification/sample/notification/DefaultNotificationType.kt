@@ -16,11 +16,15 @@ import kotlinx.parcelize.Parcelize
  */
 @Parcelize
 data class DefaultNotificationType(
-    val title: String = "Test Sample",
-    val description: String = "This is a sample notification"
-) : NotificationContent(1) {
+    val title: String = "Test Sample", val description: String = "This is a sample notification"
+) : NotificationContent(REQUEST_CODE_PUSH_NOTIFICATION) {
+    companion object {
+        private const val NOTIFICATION_ID = 123
+        private const val REQUEST_CODE_PUSH_NOTIFICATION = 1
+    }
+
     override fun getNotifyId(): Int {
-        return -1
+        return NOTIFICATION_ID
     }
 
     override fun getBy(context: Context): Notification? {
@@ -34,7 +38,6 @@ data class DefaultNotificationType(
             .setOngoing(false)
             .setAutoCancel(true)
             .setShowWhen(false)
-        // if DailyReading -> show noti fullscreen
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId("NOTIFICATION_CHANNEL")
             val channel = NotificationChannel(

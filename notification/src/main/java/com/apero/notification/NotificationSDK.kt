@@ -5,13 +5,14 @@ import android.app.Application
 import android.content.pm.PackageManager
 import com.apero.notification.executor.NotificationExecutor
 import com.apero.notification.factory.NotificationFactory
-import kotlin.contracts.contract
 
 /**
  * Created by KO Huyn on 23/12/2024.
  */
 object NotificationSDK {
     private var _application: Application? = null
+
+    private val notificationFactory by lazy { NotificationFactory.getInstance(getApplication()) }
 
     internal fun getApplication(): Application {
         return _application
@@ -23,7 +24,7 @@ object NotificationSDK {
     }
 
     @Throws(IllegalArgumentException::class)
-    fun pushNotificationAfter(
+    fun pushNotificationReminder(
         notificationContent: NotificationContent,
         reminderType: ReminderType
     ) {
@@ -50,6 +51,18 @@ object NotificationSDK {
     }
 
     fun pushNotification(notificationContent: NotificationContent) {
-        NotificationFactory.getInstance(getApplication()).pushNotification(notificationContent)
+        notificationFactory.pushNotification(notificationContent)
+    }
+
+    fun cancelNotificationReminder(requestCodeReminder: Int) {
+        NotificationExecutor.create().cancel(getApplication(), requestCodeReminder)
+    }
+
+    fun cancelNotification(notificationId: Int) {
+        notificationFactory.cancel(notificationId)
+    }
+
+    fun isNotificationActive(notificationId: Int) {
+        notificationFactory.isActive(notificationId)
     }
 }

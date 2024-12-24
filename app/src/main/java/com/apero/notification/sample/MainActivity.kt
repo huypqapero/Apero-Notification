@@ -34,14 +34,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.pushNotification).let { button ->
             button.setOnClickListener {
                 if (hourOfDay == null || minute == null) {
-                    NotificationSDK.pushNotificationAfter(FullscreenNotificationContent(),
+                    NotificationSDK.pushNotificationReminder(
+                        FullscreenNotificationContent(),
                         ReminderType.OneTime(15, TimeUnit.MINUTES)
                     )
                 } else {
-                    NotificationSDK.pushNotificationAfter(
-                        FullscreenNotificationContent(),
-                        ReminderType.Schedule(hourOfDay ?: 0, minute ?: 0)
-                    )
+                    NotificationSDK.pushNotification(FullscreenNotificationContent())
                 }
             }
         }

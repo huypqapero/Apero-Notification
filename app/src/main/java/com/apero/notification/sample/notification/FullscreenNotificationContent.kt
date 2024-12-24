@@ -20,16 +20,21 @@ import kotlinx.parcelize.Parcelize
 data class FullscreenNotificationContent(
     val title: String = "This is sample",
     val content: String = "This is sample description"
-) :
-    NotificationContent(-2) {
+) : NotificationContent(REQUEST_CODE_PUSH_NOTIFICATION) {
+    companion object {
+        private const val NOTIFICATION_ID = 111
+        private const val REQUEST_CODE_PUSH_NOTIFICATION = 2
+        private const val CHANNEL = "NOTIFICATION_CHANNEL"
+    }
+
     override fun getNotifyId(): Int {
-        return -5
+        return NOTIFICATION_ID
     }
 
     override fun getBy(context: Context): Notification {
         val notificationManager = context.getNotificationManager()
 
-        val builder = NotificationCompat.Builder(context, "NOTIFICATION_CHANNEL")
+        val builder = NotificationCompat.Builder(context, CHANNEL)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentTitle(title)
             .setContentInfo(content)
@@ -42,9 +47,9 @@ data class FullscreenNotificationContent(
                 true
             )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setChannelId("NOTIFICATION_CHANNEL")
+            builder.setChannelId(CHANNEL)
             val channel = NotificationChannel(
-                "NOTIFICATION_CHANNEL",
+                CHANNEL,
                 context.getString(R.string.app_name),
                 NotificationManager.IMPORTANCE_HIGH
             )
@@ -59,7 +64,7 @@ data class FullscreenNotificationContent(
         intent.putExtra("ARG", this)
         return PendingIntent.getActivity(
             context,
-            -3,
+            -1,
             intent,
             PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
