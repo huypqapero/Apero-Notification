@@ -1,4 +1,8 @@
 # Apero-Notification
+## Implementation
+```kotlin
+implementation("apero-inhouse:notification:1.0.0")
+```
 ## How to use:
 ### In Manifest:
 ```kotlin
@@ -50,7 +54,6 @@ data class SampleNotificationType(
         }
         return builder.build()
     }
-
 ```
 ### Push Notification OneTime After:
 ```kotlin
@@ -70,7 +73,16 @@ NotificationSDK.pushNotificationAfter(
 ```kotlin
 NotificationSDK.pushNotification(SampleNotificationType())
 ```
-
+### Cancel Push Notification Schedule
+```kotlin
+NotificationSDK.cancelNotificationReminder(DefaultNotificationType.REQUEST_CODE_PUSH_NOTIFICATION)
+```
+### Clear Notification In Statusbar
+```kotlin
+if (NotificationSDK.isNotificationActive(DefaultNotificationType.NOTIFICATION_ID)) {
+    NotificationSDK.cancelNotification(DefaultNotificationType.NOTIFICATION_ID)
+}
+```
 ### Using With Notification Fullscreen:
 ```kotlin
 class SampleFullscreenActivity : NotificationFullscreenActivity() {
